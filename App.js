@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import * as Camera from 'expo-camera';
 import * as Location from 'expo-location';
 import React from 'react';
-import { HomeScreen, ImageScreen } from './AppView';
+import { HomeScreen, ImageScreen } from './components/AppView.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -81,7 +81,7 @@ import { createStackNavigator } from '@react-navigation/stack';
         <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Image" component={ImageScreen} initialParams={{ selectedAsset }}/>
+        <Stack.Screen name="Image" component={ImageScreen} initialParams={{ selectedAsset: selectedAsset }}/>
       </Stack.Navigator>
        </NavigationContainer>      
   )};
