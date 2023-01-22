@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Plantopedia",
+    "slug": "Plantopedia",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
