@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import * as Camera from 'expo-camera';
 import * as Location from 'expo-location';
 import React from 'react';
-import { HomeScreen, ImageScreen } from './components/AppView.js';
+import { HomeScreen, ImageScreen } from '/components/screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
