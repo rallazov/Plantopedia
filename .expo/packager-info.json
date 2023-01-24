@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "expoServerPort": 8081,
   "packagerPort": 8081,
+=======
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
+>>>>>>> a5696a3efbbc2851ad088fd69e9694f4f2e3f3b1
   "packagerPid": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,

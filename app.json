@@ -1,5 +1,11 @@
 {
-  "expo": {
+  "expo": { 
+    "ios": {
+        "infoPlist": {
+            "NSLocationWhenInUseUsageDescription": "This app needs access to location when open.",
+            "NSLocationAlwaysUsageDescription": "This app needs access to location always."
+    }
+},
     "name": "Plantopedia",
     "slug": "Plantopedia",
     "version": "1.0.0",

@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 import * as Camera from 'expo-camera';
 import * as Location from 'expo-location';
 import React from 'react';
-import { HomeScreen, ImageScreen } from './AppView';
+import { HomeScreen } from './components/HomeScreen.js';
+import { ImageScreen } from './components/ImageScreen.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -24,7 +25,7 @@ import { createStackNavigator } from '@react-navigation/stack';
    * Asks for camera roll permission and launches the image picker
    */
   const pickImage = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
+    const { status } = await Camera.requestBackgroundPermissionsAsync();
     if (status !== 'granted') {
       alert('Sorry, we need camera roll permissions to make this work!');
       return;
@@ -43,7 +44,7 @@ import { createStackNavigator } from '@react-navigation/stack';
    * Asks for camera permissions and launches the camera
    */
   const takePicture = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
+    const { status } = await Camera.requestBackgroundPermissionsAsync();
     if (status !== 'granted') {
       alert('Sorry, we need camera permissions to make this work!');
       return;
@@ -58,7 +59,7 @@ import { createStackNavigator } from '@react-navigation/stack';
   }
   };
   const getLocation = async () => {
-    const { status } = await Location.requestPermissionsAsync();
+    const { status } = await Location.requestBackgroundPermissionsAsync();
     if (status !== 'granted') {
       alert('Sorry, we need location permissions to make this work!');
       return;
@@ -81,7 +82,7 @@ import { createStackNavigator } from '@react-navigation/stack';
         <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Image" component={ImageScreen} initialParams={{ selectedAsset }}/>
+        <Stack.Screen name="Image" component={ImageScreen} initialParams={{ selectedAsset: selectedAsset }}/>
       </Stack.Navigator>
        </NavigationContainer>      
   )};
