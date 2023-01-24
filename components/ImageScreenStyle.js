@@ -1,7 +1,6 @@
 
 import { View, Text, Button, Image, StyleSheet } from 'react-native';
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -13,6 +12,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-    
 });
-export { HomeScreenStyle};
+
+export default styles;
