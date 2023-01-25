@@ -9,6 +9,10 @@ import { HomeScreen } from './components/HomeScreen.js';
 import { ImageScreen } from './components/ImageScreen.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
+import { SearchScreen } from './components/SearchScreen';
+import { WebView } from 'expo-web-browser';
+
 
 
 /**
@@ -79,13 +83,50 @@ import { createStackNavigator } from '@react-navigation/stack';
     }, []);
   
     return (
-        <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Image" component={ImageScreen} initialParams={{ selectedAsset: selectedAsset }}/>
-      </Stack.Navigator>
-       </NavigationContainer>      
-  )};
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="Home" 
+            component={HomeScreen} 
+            options={{
+              title: 'Plantopedia',
+              headerRight: () => (
+                <Ionicons 
+                  name="md-search" 
+                  size={24} 
+                  color="black" 
+                  onPress={() => navigation.navigate('Search')} 
+                />
+              ),
+            }} 
+          />
+          <Stack.Screen 
+            name="Image" 
+            component={ImageScreen} 
+            options={{
+              title: 'Plant Image',
+            }} 
+          />
+          <Stack.Screen 
+            name="Search" 
+            component={SearchScreen} 
+            options={{
+              title: 'Search Plants',
+            }} 
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
+  function MyComponent() {
+    return (
+      <WebView
+        source={{ uri: 'https://www.example.com' }}
+        style={{ marginTop: 20 }}
+      />
+    );
+  }
   
 const styles = StyleSheet.create({
   container: {
