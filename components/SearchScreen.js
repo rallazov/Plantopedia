@@ -1,5 +1,24 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { SearchBar } from 'react-native-elements';
+
+const styles = StyleSheet.create({
+  searchBar: {
+    borderRadius: 20,
+  },
+});
+
+const MyComponent = () => {
+  return (
+    <View>
+      <SearchBar
+        placeholder="Search..."
+        containerStyle={styles.searchBar}
+        inputContainerStyle={{ borderRadius: 20 }}
+      />
+    </View>
+  );
+}
 
 function SearchScreen() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,4 +71,4 @@ function SearchScreen() {
   );
 }
 
-export { SearchScreen };
+export { SearchScreen , MyComponent};

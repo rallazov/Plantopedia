@@ -85,21 +85,22 @@ import { WebView } from 'expo-web-browser';
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen 
-            name="Home" 
-            component={HomeScreen} 
-            options={{
-              title: 'Plantopedia',
-              headerRight: () => (
-                <Ionicons 
-                  name="md-search" 
-                  size={24} 
-                  color="black" 
-                  onPress={() => navigation.navigate('Search')} 
-                />
-              ),
-            }} 
-          />
+        <Stack.Screen 
+  name="Home" 
+  component={({ navigation }) => <HomeScreen navigation={navigation} />}
+  options={{
+    title: 'Plantopedia',
+    headerRight: () => (
+      <Ionicons 
+        name="md-search" 
+        size={24} 
+        color="black" 
+        onPress={() => navigation.navigate('Search')} 
+      />
+    ),
+  }} 
+/>
+
           <Stack.Screen 
             name="Image" 
             component={ImageScreen} 
@@ -107,6 +108,7 @@ import { WebView } from 'expo-web-browser';
               title: 'Plant Image',
             }} 
           />
+
           <Stack.Screen 
             name="Search" 
             component={SearchScreen} 
@@ -114,6 +116,7 @@ import { WebView } from 'expo-web-browser';
               title: 'Search Plants',
             }} 
           />
+          
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -122,7 +125,7 @@ import { WebView } from 'expo-web-browser';
   function MyComponent() {
     return (
       <WebView
-        source={{ uri: 'https://www.example.com' }}
+        source={{ uri: 'exp://192.168.0.153:19000' }}
         style={{ marginTop: 20 }}
       />
     );
