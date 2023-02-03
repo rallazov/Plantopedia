@@ -9,11 +9,14 @@ function HomeScreen() {
     const [selectedAsset, setSelectedAsset] = useState({});
     return (
         <View style={styles.container}>
-            <Text>PLANTOPEDIA WELCOMES YOU!</Text>
-            <Button title="Select Image" onPress={() => navigation.navigate('Image', {selectedAsset: selectedAsset})} />
-            <Button title="Take a Picture"onPress={() => navigation.navigate('Image', {selectedAsset: selectedAsset})} />
+            <NavigationContainer>
+                <Stack.Navigator>
+                    {/* <Stack.Screen name="Image" component={ImageScreen} />
+                    <Stack.Screen name="Search" component={SearchScreen} /> */}
+                </Stack.Navigator>
+            </NavigationContainer>
         </View>
-        
+
     );
 }
-export { HomeScreen};
+export { HomeScreen };
