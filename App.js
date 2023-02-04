@@ -1,151 +1,88 @@
+import React, { useState } from 'react';
+import { View, TextInput, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
+import ImagePicker from 'expo-image-picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { StyleSheet, Text, View } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { useState, useEffect } from 'react';
-import * as Camera from 'expo-camera';
-import * as Location from 'expo-location';
-import React from 'react';
-import { HomeScreen } from './components/HomeScreen.js';
-import { ImageScreen } from './components/ImageScreen.js';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons';
-import { SearchScreen } from './components/SearchScreen';
-import { WebView } from 'expo-web-browser';
+const App = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [image, setImage] = useState(null);
 
-
-
-/**
- * App component that displays a button to select an image and renders the selected image
- */
- export default function App() {
-    const [location, setLocation] = useState(null);
-    const [selectedAsset, setSelectedAsset] = useState(null);
-    const Stack = createStackNavigator();
-    // const coords = location.coords
-
-
-  /**
-   * Asks for camera roll permission and launches the image picker
-   */
-  const pickImage = async () => {
-    const { status } = await Camera.requestBackgroundPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Sorry, we need camera roll permissions to make this work!');
-      return;
-    }
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  const selectImage = async () => {
+    const result = await ImagePicker.openPicker({
       allowsEditing: true,
     });
 
-    if (!result.canceled) {
-      setSelectedAsset(result);
+    if (!result.cancelled) {
+      setImage(result.uri);
     }
   };
-  
-  /**
-   * Asks for camera permissions and launches the camera
-   */
-  const takePicture = async () => {
-    const { status } = await Camera.requestBackgroundPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Sorry, we need camera permissions to make this work!');
-      return;
-    }
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-    });
-    const { uri } = await result.assets[0].getAssetInfoAsync();
-     if (!result.canceled) {
-    let selectedAsset = uri;
-    setSelectedAsset(selectedAsset);
-  }
-  };
-  const getLocation = async () => {
-    const { status } = await Location.requestBackgroundPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Sorry, we need location permissions to make this work!');
-      return;
-    }
-  
-    const location = await Location.getCurrentPositionAsync();
-    console.log(location);
-    return location;
-  };
-  
-  
-  
-    useEffect(() => {
-      getLocation().then(location => {
-        setLocation(location);
-      });
-    }, []);
-  
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-        <Stack.Screen 
-  name="Home" 
-  component={({ navigation }) => <HomeScreen navigation={navigation} />}
-  options={{
-    title: 'Plantopedia',
-    headerRight: () => (
-      <Ionicons 
-        name="md-search" 
-        size={24} 
-        color="black" 
-        onPress={() => navigation.navigate('Search')} 
+
+
+
+  return (
+    <View style={styles.container}>
+
+      <TextInput
+        style={styles.searchInput}
+        onChangeText={text => setSearchTerm(text)}
+        value={searchTerm}
+        placeholder="Search"
       />
-    ),
-  }} 
-/>
 
-          <Stack.Screen 
-            name="Image" 
-            component={ImageScreen} 
-            options={{
-              title: 'Plant Image',
-            }} 
-          />
+      
+        <TouchableOpacity style={styles.button} onPress={selectImage}>
+        <MaterialCommunityIcons
+          name="camera"
+          size={50}
+          color="yellow"
+        />
+        </TouchableOpacity>
+        {image && <Image source={{ uri: image }} style={styles.searchContainer} />}
+     
 
-          <Stack.Screen 
-            name="Search" 
-            component={SearchScreen} 
-            options={{
-              title: 'Search Plants',
-            }} 
-          />
-          
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+    </View>
+  );
+};
 
-  function MyComponent() {
-    return (
-      <WebView
-        source={{ uri: 'exp://192.168.0.153:19000' }}
-        style={{ marginTop: 20 }}
-      />
-    );
-  }
-  
 const styles = StyleSheet.create({
   container: {
+    padding:40,
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:'#fdd'
   },
-  imageDisplay: {
-    display: 'block',
-  },
-  image: {
+  searchContainer: {
     width: '100%',
-    height: '100%',
+    height: 50,
+    padding: 10,
   },
-  loadingIndicator: {
-    display: 'none',
+  imageContainer: {
+    width: '100%',
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: 0,
+  
+  },
+  searchInput: {
+    height: 45,
+    width: '100%',
+    borderColor: 'yellow',
+    borderWidth: 8,
+    padding: 10,
+    borderRadius: 25,
+  },
+  button: {
+    marginTop: 660,
+    padding: 30,
+    backgroundColor: 'indigo',
+    alignItems: 'center',
+    borderRadius: 50,
+    borderWidth: 10,
+    borderColor: 'yellow'
   },
 });
+
+
+export default App;
