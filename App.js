@@ -3,6 +3,8 @@ import { View, TextInput, TouchableOpacity, Text, Image, StyleSheet } from 'reac
 import ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [image, setImage] = useState(null);
@@ -19,32 +21,59 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
+
+        <View style={styles.headerLeftContainer}>
+          <Text style={styles.headerText}>Plantopedia</Text>
+        </View>
+
+        <View style={styles.headerMiddleContainer}>
+          {/* Place for logo */}
+        </View>
+
+        <View style={styles.headerRightContainer}>
+          <View style={styles.headerProfileContainer}>
+            <Text style={styles.headerProfileText}>Sign In</Text>
+          </View>
+        </View>
+      </View>
+
+
       <View style={styles.searchContainer}>
         <MaterialCommunityIcons
           name="magnify"
           size={30}
-          color="gray"
+          color="indigo"
           style={styles.searchIcon}
         />
         <TextInput
           style={styles.searchInput}
-          onChangeText={text => setSearchTerm(text)}
-          value={searchTerm}
-          placeholder="Search"
+          placeholder="Search plants"
+          autoFocus={true}
+          underlineColorAndroid="transparent"
         />
       </View>
-      <View style={styles.container}>
-        {image && <Image source={{ uri: image }} style={styles.imageContainer} />}
+
+
+
+      <View style={styles.button}>
+        <TouchableOpacity onPress={selectImage}>
+          <MaterialCommunityIcons
+            name="camera"
+            size={50}
+            color="yellow"
+          />
+        </TouchableOpacity>
+        {image && (
+          <Image
+            source={{ uri: image }}
+            style={styles.imageContainer}
+          />
+        )}
       </View>
-      <TouchableOpacity style={styles.button} onPress={selectImage}>
-        <MaterialCommunityIcons
-          name="camera"
-          size={50}
-          color="yellow"
-        />
-      </TouchableOpacity>
     </View>
   );
+
 };
 
 const styles = StyleSheet.create({
@@ -52,44 +81,88 @@ const styles = StyleSheet.create({
     padding: 40,
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fdd'
+    backgroundColor: '#fdd',
+  },
+  headerContainer: {
+    width: '100%',
+    height: 80,
+    backgroundColor: 'white',
+    alignItems: 'top',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    borderRadius: 20
+  },
+  headerLeftContainer: {
+    alignItems: 'flex-start',
+  },
+  headerText: {
+    fontSize: 18,
+    color: 'green',
+    fontWeight: 'bold'
+  },
+  headerMiddleContainer: {
+    alignItems: 'center',
+    height: 80,
+  },
+  headerProfileContainer: {
+    height: 30,
+    width: 65,
+    borderRadius: 20,
+    backgroundColor: '#fdd',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerProfileText: {
+    fontSize: 18,
+    color: 'green',
+  },
+  headerRightContainer: {
+    alignItems: 'flex-end',
   },
   searchContainer: {
     flexDirection: 'row',
     height: 50,
-    padding: 10,
     width: '100%',
     backgroundColor: 'white',
     borderRadius: 25,
     borderWidth: 1,
     borderColor: 'gray',
     alignItems: 'center',
+    paddingTop: 0,
+    marginTop: 10,
   },
   searchIcon: {
-    padding: 1,
+    padding: 10,
   },
   searchInput: {
     flex: 1,
     height: 45,
-    padding: 10,
+    padding: 0,
+  },
+  imageContainer: {
+    width: '100%',
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   button: {
-    marginTop: 20,
     padding: 30,
     backgroundColor: 'indigo',
     alignItems: 'center',
     borderRadius: 50,
     borderWidth: 10,
-    borderColor: 'yellow'
-  },
-  imageContainer: {
-    width: '100%',
-    height: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    bottom: 0,
+    borderColor: 'yellow',
+    position: 'absolute',
+    bottom: 30,
+    // left: 20,
+    // right: 20,
   },
 });
+
+
+
+
 
 export default App;
