@@ -19,27 +19,30 @@ const App = () => {
 
 
 
-  return (
+   return (
     <View style={styles.container}>
-
-      <TextInput
-        style={styles.searchInput}
-        onChangeText={text => setSearchTerm(text)}
-        value={searchTerm}
-        placeholder="Search"
-      />
-
-      
-        <TouchableOpacity style={styles.button} onPress={selectImage}>
+      <View style={styles.searchContainer}>
+        <MaterialCommunityIcons
+          name="magnify"
+          size={30}
+          color="gray"
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.searchInput}
+          onChangeText={text => setSearchTerm(text)}
+          value={searchTerm}
+          placeholder="Search"
+        />
+      </View>
+      <TouchableOpacity style={styles.button} onPress={selectImage}>
         <MaterialCommunityIcons
           name="camera"
           size={50}
           color="yellow"
         />
-        </TouchableOpacity>
-        {image && <Image source={{ uri: image }} style={styles.searchContainer} />}
-     
-
+      </TouchableOpacity>
+      {image && <Image source={{ uri: image }} style={styles.imageContainer} />}
     </View>
   );
 };
@@ -52,8 +55,22 @@ const styles = StyleSheet.create({
     backgroundColor:'#fdd'
   },
   searchContainer: {
-    width: '100%',
+    flexDirection: 'row',
     height: 50,
+    padding: 10,
+    width: '100%',
+    backgroundColor: 'white',
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: 'gray',
+    alignItems: 'center',
+  },
+  searchIcon: {
+    padding: 1,
+  },
+  searchInput: {
+    flex: 1,
+    height: 45,
     padding: 10,
   },
   imageContainer: {
@@ -64,14 +81,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
   
-  },
-  searchInput: {
-    height: 45,
-    width: '100%',
-    borderColor: 'yellow',
-    borderWidth: 8,
-    padding: 10,
-    borderRadius: 25,
   },
   button: {
     marginTop: 660,
@@ -86,3 +95,7 @@ const styles = StyleSheet.create({
 
 
 export default App;
+
+
+
+
