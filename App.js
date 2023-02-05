@@ -17,9 +17,7 @@ const App = () => {
     }
   };
 
-
-
-   return (
+  return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <MaterialCommunityIcons
@@ -35,6 +33,9 @@ const App = () => {
           placeholder="Search"
         />
       </View>
+      <View style={styles.container}>
+        {image && <Image source={{ uri: image }} style={styles.imageContainer} />}
+      </View>
       <TouchableOpacity style={styles.button} onPress={selectImage}>
         <MaterialCommunityIcons
           name="camera"
@@ -42,17 +43,16 @@ const App = () => {
           color="yellow"
         />
       </TouchableOpacity>
-      {image && <Image source={{ uri: image }} style={styles.imageContainer} />}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding:40,
+    padding: 40,
     flex: 1,
     alignItems: 'center',
-    backgroundColor:'#fdd'
+    backgroundColor: '#fdd'
   },
   searchContainer: {
     flexDirection: 'row',
@@ -73,17 +73,8 @@ const styles = StyleSheet.create({
     height: 45,
     padding: 10,
   },
-  imageContainer: {
-    width: '100%',
-    height: 200,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    bottom: 0,
-  
-  },
   button: {
-    marginTop: 660,
+    marginTop: 20,
     padding: 30,
     backgroundColor: 'indigo',
     alignItems: 'center',
@@ -91,11 +82,14 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     borderColor: 'yellow'
   },
+  imageContainer: {
+    width: '100%',
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    bottom: 0,
+  },
 });
 
-
 export default App;
-
-
-
-
