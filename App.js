@@ -2,17 +2,26 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Keyboard } from 'react-native';
 
 
+const logo = require('./assets/PlantopediaLogo.png');
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [image, setImage] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const handleSearch = () => {
+    // Perform API call or any other action with searchTerm here
+    Keyboard.dismiss();
+  };
+  
 
   const selectImage = async () => {
     const result = await ImagePicker.openPicker({
       allowsEditing: true,
     });
+    
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -28,13 +37,17 @@ const App = () => {
         </View>
 
         <View style={styles.headerMiddleContainer}>
-          {/* Place for logo */}
+          <Image source={logo} style={styles.headerLogo} />
         </View>
 
         <View style={styles.headerRightContainer}>
-          <View style={styles.headerProfileContainer}>
-            <Text style={styles.headerProfileText}>Sign In</Text>
-          </View>
+          <TouchableOpacity style={styles.headerProfileContainer} onPress={() => setLoggedIn(!loggedIn)}>
+            {loggedIn ? (
+              <Text style={styles.headerProfileText}>User name or initials</Text>
+            ) : (
+              <Text style={styles.headerProfileText}>Sign In</Text>
+            )}
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -51,7 +64,12 @@ const App = () => {
           placeholder="Search plants"
           autoFocus={true}
           underlineColorAndroid="transparent"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
         />
+        <TouchableOpacity onPress={handleSearch}>
+          <Text style={styles.searchButton}>Search</Text>
+        </TouchableOpacity>
       </View>
 
 
@@ -86,7 +104,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
     height: 80,
-    backgroundColor: 'white',
+    backgroundColor: '#A5CC94',
     alignItems: 'top',
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -99,17 +117,25 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 18,
-    color: 'green',
+    color: '#005B00',
     fontWeight: 'bold'
   },
   headerMiddleContainer: {
     alignItems: 'center',
     height: 80,
   },
+  headerLogo: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+    overflow: 'visible',
+    marginTop: -10,
+    backgroundColor: '#A5CC94'
+  },
   headerProfileContainer: {
-    height: 30,
+    height: 65,
     width: 65,
-    borderRadius: 20,
+    borderRadius: 50,
     backgroundColor: '#fdd',
     alignItems: 'center',
     justifyContent: 'center',
@@ -128,10 +154,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 25,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'indigo',
     alignItems: 'center',
     paddingTop: 0,
     marginTop: 10,
+  },
+  searchButton: {
+    backgroundColor: '#A8BDC6',
+    padding: 5,
+    borderRadius: 5,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: 'indigo'
+  },
+  searchButtonText: {
+    color: 'indigo',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   searchIcon: {
     padding: 10,
