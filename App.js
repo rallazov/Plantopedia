@@ -13,6 +13,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const handleSearch = () => {
     // Perform API call or any other action with searchTerm here
+     console.log(searchTerm);
     Keyboard.dismiss();
   };
   
@@ -79,7 +80,7 @@ const App = () => {
           <MaterialCommunityIcons
             name="camera"
             size={50}
-            color="yellow"
+            color="#CCFFE5"
           />
         </TouchableOpacity>
         {image && (
@@ -147,39 +148,40 @@ const styles = StyleSheet.create({
   headerRightContainer: {
     alignItems: 'flex-end',
   },
-  searchContainer: {
-    flexDirection: 'row',
-    height: 50,
-    width: '100%',
-    backgroundColor: 'white',
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: 'indigo',
-    alignItems: 'center',
-    paddingTop: 0,
-    marginTop: 10,
-  },
-  searchButton: {
-    backgroundColor: '#A8BDC6',
-    padding: 5,
-    borderRadius: 5,
-    marginRight: 10,
-    borderWidth: 1,
-    borderColor: 'indigo'
-  },
-  searchButtonText: {
-    color: 'indigo',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  searchIcon: {
-    padding: 10,
-  },
-  searchInput: {
-    flex: 1,
-    height: 45,
-    padding: 0,
-  },
+searchContainer: {
+  flexDirection: 'row',
+  height: 40,
+  width: '100%',
+  backgroundColor: 'white',
+  borderRadius: 25,
+  borderWidth: 1,
+  borderColor: 'indigo',
+  alignItems: 'center',
+  paddingHorizontal: 10,
+  marginTop: 10
+},
+searchIcon: {
+  padding: 7,
+},
+searchInput: {
+  flex: 1,
+  height: 40,
+  fontSize: 18,
+  paddingHorizontal: 10,
+},
+searchButton: {
+  backgroundColor: '#CCFFE5',
+  color: 'indigo',
+  borderRadius: 10,
+  height: 30,
+  width: 80,
+  textAlign: 'center',
+  textAlignVertical: 'center',
+  fontWeight: '',
+  fontSize: 18,
+  overflow: 'hidden',
+  
+},
   imageContainer: {
     width: '100%',
     height: 100,
@@ -187,12 +189,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   button: {
-    padding: 30,
+    padding: 20,
     backgroundColor: 'indigo',
     alignItems: 'center',
     borderRadius: 50,
-    borderWidth: 10,
-    borderColor: 'yellow',
+    borderWidth: 5,
+    borderColor: '#CCFFE5',
     position: 'absolute',
     bottom: 30,
     // left: 20,
